@@ -4,7 +4,7 @@ from blog.views import index
 app_name = "blog"
 urlpatterns = [
   # index
-  path('', index, name = 'base'),
+  path('', index, name = 'index'),
   # about me
   #path('aboutme/', aboutMe, name = 'aboutMe')
 ]
