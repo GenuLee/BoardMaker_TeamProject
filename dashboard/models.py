@@ -49,3 +49,19 @@ class SafetyRule(models.Model):
     class Meta:
         managed = False
         db_table = 'safety_rule'
+
+class CostsTop5(models.Model):
+    name = models.CharField(max_length=20)
+    cost = models.IntegerField()
+    cpm = models.IntegerField()
+    cost_0min = models.IntegerField()
+    cost_5min = models.IntegerField()
+    cost_10min = models.IntegerField()
+    cost_15min = models.IntegerField()
+    cost_20min = models.IntegerField()
+    cost_25min = models.IntegerField()
+    cost_30min = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'Costs_top5'

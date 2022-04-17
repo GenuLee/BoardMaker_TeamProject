@@ -8,11 +8,11 @@
       <div class="card bg-yellow-100 border-0 shadow">
           <div class="card-header d-sm-flex flex-row align-items-center flex-0">
               <div class="d-block mb-3 mb-sm-0">
-                  <h2 class="fw-extrabold h5 mt-2">공유 킥보드 업체별 시간당 가격</h2>
+                  <h2 class="fw-extrabold h5 mt-2">Top5 </h2>
               </div>
           </div>
           <div class="card-body p-2">
-            <canvas id="chart1"></canvas>
+            <canvas id="chart6"></canvas>
           </div>
       </div>
   </section>
@@ -88,7 +88,7 @@ function dynamicColors() {
   return "rgba(" + r + "," + g + "," + b + ", 0.7)";
 }
 
-var ctx = document.getElementById('chart1');
+{% comment %} var ctx = document.getElementById('chart1');
 
 lab = ["0min", "5min", "10min", "15min", "20min", "25min", "30min"];
 var datasets = new Array();
@@ -112,10 +112,6 @@ var datasets = new Array();
     legend: {
       display: true,
       position: 'right',
-      labels: {
-        boxWidth: 80,
-        fontColor: 'black'
-      }
     }
   };
 
@@ -123,7 +119,7 @@ var datasets = new Array();
     type: 'line',
     data: minData,
     options: chartOptions
-  });
+  }); {% endcomment %}
 
   {% comment %} Chart2 {% endcomment %}
   var ctx = document.getElementById('chart2').getContext('2d');
@@ -283,6 +279,39 @@ var barChart = new Chart(ctx,{
   options: chartOptions
 });
 
+{% comment %} Chart6 {% endcomment %}
+var ctx = document.getElementById('chart6');
+
+lab = ["0min", "5min", "10min", "15min"];
+var datasets = new Array();
+
+{% for cost in top5 %}
+  var chartData = {
+    label: "{{ cost.name }}",
+    data: [{{ cost.cost_0min }}, {{ cost.cost_5min }}, {{ cost.cost_10min }}, {{ cost.cost_15min }}],
+    fill: false,
+    borderColor: dynamicColors()
+  };
+  datasets[{{ forloop.counter0 }}] = chartData;
+{% endfor %} 
+
+  var minData = {
+    labels: lab,
+    datasets: datasets
+  };
+
+  var chartOptions = {
+    legend: {
+      display: true,
+      position: 'right',
+    }
+  };
+
+  var lineChart = new Chart(ctx, {
+    type: 'line',
+    data: minData,
+    options: chartOptions
+  });
 </script>
   
 {% endblock part_script %}
