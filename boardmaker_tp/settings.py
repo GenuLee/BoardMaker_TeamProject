@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import pymysql  
+
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +24,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1^@n#t_r(0x8i*z+c2dl)=*5xpz$#qe*#pej0nu^smln79)5(5'
+#SECRET_KEY = 'django-insecure-1^@n#t_r(0x8i*z+c2dl)=*5xpz$#qe*#pej0nu^smln79)5(5'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-1^@n#t_r(0x8i*z+c2dl)=*5xpz$#qe*#pej0nu^smln79)5(5')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# DEBUG = int(os.environ.get('DEBUG', 1))
+# if os.environ.get('DJANGO_ALLOWED_HOSTS'):
+#     ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
+# else:
+#     ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -82,10 +91,27 @@ WSGI_APPLICATION = 'boardmaker_tp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'board_db',  # DB명
+        'USER': 'genu1',   #개발자 id
+        'PASSWORD':'@Ajisai0147',   # 개발자 pw
+        'HOST': '3.35.37.97',       # 서버 IP
+        'PORT': '3306'
     }
 }
+
+
+# mysql
+# DATABASES = {
+#     'default': {
+#         'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.sqlite3'),
+#         'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR / 'db.sqlite3')),
+#         'USER': os.environ.get('SQL_USER', 'user'),
+#         'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),
+#         'HOST': os.environ.get('SQL_HOST', 'localhost'),
+#         'PORT': os.environ.get('SQL_PORT', '5432')
+#     }
+# }
 
 
 # Password validation
@@ -125,7 +151,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (BASE_DIR, '', 'static')
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = os.path.join(BASE_DIR, '_static')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
