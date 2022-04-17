@@ -1,79 +1,75 @@
 {% extends "base.html" %} 
 {% block title %} Dashboard {% endblock %} 
-
+{% load static %}
 {% block content %}
 {% load crispy_forms_tags %}
-{% comment %} <div class="row mt-3 pt-3">
-  <div class="col-md-8">
-    <div class="container">
-      <canvas id="chart1" width="600" height="400"></canvas>
-    </div>
-  </div>
-</div> {% endcomment %}
 <div class="row">
-  <div class="col-12 mb-4">
+  <section class="col-12 mb-4 mt-4">
       <div class="card bg-yellow-100 border-0 shadow">
           <div class="card-header d-sm-flex flex-row align-items-center flex-0">
               <div class="d-block mb-3 mb-sm-0">
-                  <div class="fs-3 fw-extrabold">공유 킥보드 업체별 시간당 가격</div>
+                  <h2 class="fw-extrabold h5 mt-2">공유 킥보드 업체별 시간당 가격</h2>
               </div>
           </div>
           <div class="card-body p-2">
             <canvas id="chart1"></canvas>
           </div>
       </div>
-  </div>
-  <div class="col-12 col-sm-6 col-xl-4 mb-4">
-      <div class="card border-0 shadow">
-          <div class="card-body">
-                <h3 class="fw-extrabold mb-2">사고 유형</h3>
-                <div class="small d-flex mt-1">                               
-                  <canvas id="chart2"></canvas>
+  </section>
+  <section class="col-12 col-sm-6 col-xl-4 mb-4">
+      <article class="card border-0 shadow">
+            <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+                <h2 class="fw-extrabold h5">사고 유형</h2>
+            </div>
+            <div class="small d-flex mt-1 mb-2">                               
+              <canvas id="chart2"></canvas>
+            </div>
+      </article>
+  </section>
+  <section class="col-12 col-sm-6 col-xl-4 mb-4">
+      <article class="card border-0 shadow">
+                <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+                  <h2 class="fw-extrabold h5">사고 유형별 세부사항</h2>
                 </div>
-          </div>
-      </div>
-  </div>
-  <div class="col-12 col-sm-6 col-xl-4 mb-4">
-      <div class="card border-0 shadow">
-          <div class="card-body">
+                
               <div class="row d-block d-xl-flex align-items-center">
-                <h2 class="fw-extrabold h5">사고 유형별 세부사항</h2>
                   <div class="col-12 col-xl-6 ">
-                      <div class="small d-flex mt-1">                               
-                        <canvas id="chart3_1"></canvas>
-                      </div>
+                    <h5 class="h6 text-gray-400 mb-0 text-center mt-2">제품관련</h5>
+                    <div class="small d-flex mt-1 mb-2">                               
+                      <canvas id="chart3_1"></canvas>
+                    </div>
                   </div>
                   <div class="col-12 col-xl-6">
-                      <div class="small d-flex mt-1">                               
-                        <canvas id="chart3_2"></canvas>
-                      </div>
+                    <h5 class="h6 text-gray-400 mb-0 text-center mt-2">주행중 사고</h5>
+                    <div class="small d-flex mt-1 mb-2">                               
+                      <canvas id="chart3_2"></canvas>
+                    </div>
                   </div>
-              </div>
           </div>
-      </div>
-  </div>
-  <div class="col-12 col-sm-6 col-xl-4 mb-4">
-      <div class="card border-0 shadow">
-          <div class="card-body">
-            <h3 class="fw-extrabold mb-2">사고 현황</h3>
-            <h2 class="h6 text-gray-400 mb-0"> 사고 건수</h2>
-            <div class="small d-flex mt-1">                               
+      </article>
+  </section>
+  <section class="col-12 col-sm-6 col-xl-4 mb-4">
+      <article class="card border-0 shadow">
+          <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+            <h3 class="fw-extrabold h5">사고 현황</h3>
+          </div>
+            <div class="small d-flex mt-1 mb-2">                               
             <canvas id="chart4"></canvas>
             </div>
-          </div>
-      </div>
-    </div>
+          
+      </article>
+    </section>
   </div>
-  <div class="col-12 col-sm-6 col-xl-4 mb-4">
-    <div class="card border-0 shadow">
-        <div class="card-body">
-          <h3 class="fw-extrabold mb-2">이용자 안전수칙 준수 여부</h3>
-          <div class="small d-flex mt-1">                               
-          <canvas id="chart5"></canvas>
-          </div>
+  <section class="col-12 col-sm-6 col-xl-4 mb-4">
+    <article class="card border-0 shadow">
+        <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+          <h3 class="fw-extrabold h5">이용자 안전수칙 준수 여부</h3>
         </div>
-    </div>
-  </div>
+        <div class="small d-flex mt-1 mb-2">                               
+          <canvas id="chart5"></canvas>
+        </div>
+    </article>
+  </section>
 </div>
 </div>
 </div>
@@ -138,7 +134,6 @@ var datasets = new Array();
     labels: lab,
     datasets: [
     {
-      label: [{% for type in acctypes %} "{{ type.ac_detail }}", {% endfor %}],
       data: [{% for type in acctypes %} "{{ type.ac_case }}", {% endfor %}],
       backgroundColor: [{% for type in acctypes %} dynamicColors(), {% endfor %}]
     }]
@@ -147,9 +142,10 @@ var datasets = new Array();
     datasets: chartData
   };
   var chartOptions = {
-    legend: {
-      display: true,
-      position: 'right',
+    plugins: {
+      legend: {
+        display: false,
+      }
     }
   };
   var barChart = new Chart(ctx,{
@@ -290,16 +286,3 @@ var barChart = new Chart(ctx,{
 </script>
   
 {% endblock part_script %}
-
-
-{
-  label: "준수 비율",
-  data: [{% for acc in accidents %} {{ acc.dead }}, {% endfor %}],
-  backgroundColor: dynamicColors()
-},
-
-{
-  label: "미준수 비율",
-  data: [{% for acc in accidents %} {{ acc.injured }}, {% endfor %}],
-  backgroundColor: dynamicColors()
-}
