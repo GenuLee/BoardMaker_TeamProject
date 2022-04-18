@@ -154,7 +154,16 @@
 </defs>
 </svg>
 
-<div>
-  
+<h2 class="fw-extrabold text-center">Portfolio</h2>
+<br><br><br>
+
+<div class="mt-50">
+  <h2 class="fw-extrabold h5 mt-2 text-center">Dashboard 제작</h2>
+  <h5 class="h6 text-gray-400 mb-0 text-center mt-2">공유 킥보드 관련 정보 전달을 위한 Dashboard</h5>
+  <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto pagination justify-content-center" width="300" height="300" xmlns="http://www.w3.org/2000/svg" role="img"  preserveAspectRatio="xMidYMid slice" focusable="false"><image width="100%" height="100%" href="{% static '/img/img_board.jpg'%}"/></svg>
 </div>
+<div class="pagination justify-content-center">
+  <a class="btn btn-info btn-sm float-right" href="{% url 'dashboard:dashboard' %}">Dashboard</a>
+</div>
+
 {% endblock %}

@@ -285,7 +285,7 @@ var ctx = document.getElementById('chart6');
 lab = ["0min", "5min", "10min", "15min"];
 var datasets = new Array();
 
-{% for cost in top5 %}
+{% comment %} {% for cost in top5 %}
   var chartData = {
     label: "{{ cost.name }}",
     data: [{{ cost.cost_0min }}, {{ cost.cost_5min }}, {{ cost.cost_10min }}, {{ cost.cost_15min }}],
@@ -293,11 +293,44 @@ var datasets = new Array();
     borderColor: dynamicColors()
   };
   datasets[{{ forloop.counter0 }}] = chartData;
-{% endfor %} 
+{% endfor %}  {% endcomment %}
+
+var chartData = [
+  {
+    label: "{{ top5.0.name }}",
+    data: [{{ top5.0.cost_0min }}, {{ top5.0.cost_5min }}, {{ top5.0.cost_10min }}, {{ top5.0.cost_15min }}],
+    fill: false,
+    borderColor: 'rgba(0, 191, 255, 0.5)'
+  },
+  {
+    label: "{{ top5.1.name }}",
+    data: [{{ top5.1.cost_0min }}, {{ top5.1.cost_5min }}, {{ top5.1.cost_10min }}, {{ top5.1.cost_15min }}],
+    fill: false,
+    borderColor: 'rgba(255, 0, 0, 0.5)'
+  },
+  {
+    label: "{{ top5.2.name }}",
+    data: [{{ top5.2.cost_0min }}, {{ top5.2.cost_5min }}, {{ top5.2.cost_10min }}, {{ top5.2.cost_15min }}],
+    fill: false,
+    borderColor: 'rgba(189, 183, 107, 1)'
+  },
+  {
+    label: "{{ top5.3.name }}",
+    data: [{{ top5.3.cost_0min }}, {{ top5.3.cost_5min }}, {{ top5.3.cost_10min }}, {{ top5.3.cost_15min }}],
+    fill: false,
+    borderColor: 'rgba(124. 252. 0, 0.5)'
+  },
+  {
+    label: "{{ top5.4.name }}",
+    data: [{{ top5.4.cost_0min }}, {{ top5.4.cost_5min }}, {{ top5.4.cost_10min }}, {{ top5.4.cost_15min }}],
+    fill: false,
+    borderColor: 'rgba(222, 184, 135, 1)'
+  },
+]
 
   var minData = {
     labels: lab,
-    datasets: datasets
+    datasets: chartData
   };
 
   var chartOptions = {
