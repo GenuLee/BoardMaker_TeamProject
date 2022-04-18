@@ -28,14 +28,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-1^@n#t_r(0x8i*z+c2dl)=*5xpz$#qe*#pej0nu^smln79)5(5')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-# DEBUG = int(os.environ.get('DEBUG', 1))
-# if os.environ.get('DJANGO_ALLOWED_HOSTS'):
-#     ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
-# else:
-#     ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+DEBUG = int(os.environ.get('DEBUG', 1))
+if os.environ.get('DJANGO_ALLOWED_HOSTS'):
+    ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
+else:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -95,29 +96,29 @@ WSGI_APPLICATION = 'boardmaker_tp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'board_db',  # DB명
-        'USER': 'genu1',   #개발자 id
-        'PASSWORD':'@Ajisai0147',   # 개발자 pw
-        'HOST': '3.35.37.97',       # 서버 IP
-        'PORT': '3306'
-    }
-}
-
-
-# mysql
 # DATABASES = {
 #     'default': {
-#         'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.sqlite3'),
-#         'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR / 'db.sqlite3')),
-#         'USER': os.environ.get('SQL_USER', 'user'),
-#         'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),
-#         'HOST': os.environ.get('SQL_HOST', 'localhost'),
-#         'PORT': os.environ.get('SQL_PORT', '5432')
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'board_db',  # DB명
+#         'USER': 'genu1',   #개발자 id
+#         'PASSWORD':'@Ajisai0147',   # 개발자 pw
+#         'HOST': '3.35.37.97',       # 서버 IP
+#         'PORT': '3306'
 #     }
 # }
+
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.mysql'),
+        'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR / 'db.mysql')),
+        'USER': os.environ.get('SQL_USER', 'user'),
+        'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),
+        'HOST': os.environ.get('SQL_HOST', 'localhost'),
+        'PORT': os.environ.get('SQL_PORT', '5432')
+    }
+}
 
 
 # Password validation

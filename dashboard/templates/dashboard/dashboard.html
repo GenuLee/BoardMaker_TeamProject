@@ -293,7 +293,12 @@ var datasets = new Array();
     borderColor: dynamicColors()
   };
   datasets[{{ forloop.counter0 }}] = chartData;
-{% endfor %}  {% endcomment %}
+{% endfor %}  
+  var minData = {
+    labels: lab,
+    datasets: datasets
+  };
+{% endcomment %}
 
 var chartData = [
   {
