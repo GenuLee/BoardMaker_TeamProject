@@ -96,29 +96,29 @@ WSGI_APPLICATION = 'boardmaker_tp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'board_db',  # DB명
-#         'USER': 'genu1',   #개발자 id
-#         'PASSWORD':'@Ajisai0147',   # 개발자 pw
-#         'HOST': '3.35.37.97',       # 서버 IP
-#         'PORT': '3306'
-#     }
-# }
-
-
-
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.mysql'),
-        'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR / 'db.mysql')),
-        'USER': os.environ.get('SQL_USER', 'user'),
-        'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),
-        'HOST': os.environ.get('SQL_HOST', 'localhost'),
-        'PORT': os.environ.get('SQL_PORT', '5432')
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'board_db',  # DB명
+        'USER': 'genu1',   #개발자 id
+        'PASSWORD':'@Ajisai0147',   # 개발자 pw
+        'HOST': '3.35.37.97',       # 서버 IP
+        'PORT': '3306'
     }
 }
+
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.mysql'),
+#         'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR / 'db.mysql')),
+#         'USER': os.environ.get('SQL_USER', 'user'),
+#         'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),
+#         'HOST': os.environ.get('SQL_HOST', 'localhost'),
+#         'PORT': os.environ.get('SQL_PORT', '5432')
+#     }
+# }
 
 
 # Password validation
