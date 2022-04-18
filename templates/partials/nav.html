@@ -22,8 +22,7 @@
         <ul class="navbar-nav ml-auto">
           {% if user.is_authenticated %}
           <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ user.username }}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -32,10 +31,10 @@
           </li>
           {% else %}
           <li class="nav-item">
-              <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Log In</a>
+              <a class="nav-link" href="/accounts/login/" data-toggle="modal" data-target="#loginModal">Log In</a>
           </li>
           {% endif %}
-      </ul>
+        </ul>
       </div>
     </div>
   </nav>
